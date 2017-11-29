@@ -19,7 +19,6 @@ Warunki:
 •	Osoba prywatna:
 	o	Musi od razu podać wszystkie dane.
 	o	Nie rozliczamy się z nią później.
-	o	
 •	Konferencje:
 	o	Maksymalna długość konferencji to 3 dni
 
