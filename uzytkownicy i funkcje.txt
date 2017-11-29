@@ -1,0 +1,7 @@
+U¿ytkownicy i funkcje systemu:
+•	Firma –  zg³asza iloœæ miejsc do zarezerwowania, 2 tygodnie przed konferencj¹ musi uzupe³niæ dane tych osób. Obci¹¿enie finansowe firmy jest ustalane na podstawie wstêpnej deklaracji potem wyrównuje siê kwotê zwracaj¹c lub wymagaj¹c dodatkowej wp³aty. 
+•	Osoba prywatna – rezerwuje miejsca dla siebie i znajomych na konferencje i warsztaty p³aci od razu. 
+•	Ksiêgowoœæ – generuje odpowiednie zestawienia finansowe, zg³aszaj¹c nadp³atê lub niedop³atê w przypadku firm.
+•	Organizatorzy konferencji – generuje listy osób na poszczególne warsztaty i dni konferencji.
+•	Klienci ogólnie – kontroluje harmonogramy klientów aby wydarzenia w których bior¹ udzia³ na siebie nie nachodzi³y. 
+
