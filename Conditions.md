@@ -1,14 +1,14 @@
 Warunki:
 * Warsztaty
-  * Minimalna liczba ludzi na warsztaty to 25% maksymalnej
-  * Pieniądze w przypadku nie odbycia się warsztatów są zwracane
-  * Wstęp mają tylko ci którzy mają w danym dniu bilet na konferencje
-  * Ilość maksymalna siedzeń i cena jest ustalona osobno dla każdego warsztatu
+  * Minimalna liczba ludzi na warsztaty to bazowo 25% maksymalnej liczby (organizator może zmienić)
+  * Pieniądze w przypadku nie odbycia się warsztatów są zwracane klientom
+  * Wstęp mają tylko ci, którzy mają w danym dniu bilet na konferencję
+  * Ilość maksymalna siedzeń, cena i ewentualne zniżki są ustalone osobno dla każdego warsztatu
+  * Może odbywać się wiele warsztatów na raz, ale niedopuszczalen są kolizja z punktu widzenia osoby
 * Rodzaje zniżek (konferencja/warsztat):
   * Zniżka dla studenta/ucznia
-  * Zniżka na zakup więcej niż jednego dnia
-  * Zniżka za zakup biletów 3 tygodnie przed czasem konferencji
-  * Zniżka za zakup biletów miesiąc przed czasem konferencji
+  * Zniżka na zakup biletu na więcej niż jeden dzień konferencji
+  * Zniżka za zakup biletów wcześniej (maksymalnie pół roku) 
 * Osoby
   * Nikt nie może być zapisany na równoległe warsztaty/konferencje
   * Osoba ma wstęp tylko na dzień, na który ma bilet
@@ -19,5 +19,7 @@ Warunki:
   * Musi od razu podać wszystkie dane.
   * Nie rozliczamy się z nią później chyba że zwracamy za warsztaty które się nie odbyły.
 * Konferencje:
-  * Maksymalna długość konferencji to 3 dni 	`ten wymóg chyba nam nic nie zmienia, w treści zadania jest o typowej długości`
+  * Maksymalna długość konferencji to 5 dni
+  * Konferencje mogą na siebie nachodzić
+  
 
