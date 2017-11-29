@@ -10,7 +10,6 @@ Warunki:
   * Zniżka za zakup biletów 3 tygodnie przed czasem konferencji
   * Zniżka za zakup biletów miesiąc przed czasem konferencji
 * Osoby
-  * Każda osoba musi mieć firmę w której pracuje 	`po co nam ten wymóg?`
   * Nikt nie może być zapisany na równoległe warsztaty/konferencje
   * Osoba ma wstęp tylko na dzień, na który ma bilet
 * Firma:
@@ -18,7 +17,7 @@ Warunki:
   * Zwracamy im pieniądze lub żądamy dopłaty 2 tygodnie przed konferencją
 * Osoba prywatna:
   * Musi od razu podać wszystkie dane.
-  * Nie rozliczamy się z nią później. 			`rozliczamy się, tak myślę, w przypadku odwołania warsztatów`
+  * Nie rozliczamy się z nią później chyba że zwracamy za warsztaty które się nie odbyły.
 * Konferencje:
   * Maksymalna długość konferencji to 3 dni 	`ten wymóg chyba nam nic nie zmienia, w treści zadania jest o typowej długości`
 
