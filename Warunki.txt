@@ -1,0 +1,25 @@
+Warunki:
+•	Warsztaty
+	o	Minimalna liczba ludzi na warsztaty to 25% maksymalnej
+		*	Pieni¹dze w przypadku nie odbycia siê warsztatów s¹ zwracane
+	o	Wstêp maj¹ tylko ci którzy maj¹ w danym dniu bilet na konferencje
+	o	Iloœæ maksymalna siedzeñ i cena jest ustalona osobno dla ka¿dego warsztatu
+•	Rodzaje zni¿ek (konferencja/warsztat):
+	o	Zni¿ka dla studenta/ucznia
+	o	Zni¿ka na zakup wiêcej ni¿ jednego dnia
+	o	Zni¿ka za zakup biletów 3 tygodnie przed czasem konferencji
+	o	Zni¿ka za zakup biletów miesi¹c przed czasem konferencji
+•	Osoby
+	o	Ka¿da osoba musi mieæ firmê w której pracuje
+	o	Nikt nie mo¿e byæ zapisany na równoleg³e warsztaty/konferencje
+	o	Osoba ma wstêp tylko na dzieñ w na który ma bilet
+•	Firma:
+	o	Firma p³aci tyle ile wychodzi z deklaracji
+	o	Zwracamy im pieni¹dze lub ¿¹damy dop³aty 2 tygodnie przed konferencj¹
+•	Osoba prywatna:
+	o	Musi od razu podaæ wszystkie dane.
+	o	Nie rozliczamy siê z ni¹ póŸniej.
+	o	
+•	Konferencje:
+	o	Maksymalna d³ugoœæ konferencji to 3 dni
+
