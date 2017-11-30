@@ -21,5 +21,7 @@ Warunki:
 * Konferencje:
   * Maksymalna długość konferencji to 5 dni
   * Konferencje mogą na siebie nachodzić
+* Rozliczenia:
+  * Nie można zapłacić niepełnej kwoty, przelewy częściowe będą natychmiast odsyłane.
   
 
