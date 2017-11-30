@@ -6,7 +6,8 @@ Warunki:
   * Ilość maksymalna siedzeń, cena i ewentualne zniżki są ustalone osobno dla każdego warsztatu
   * Może odbywać się wiele warsztatów na raz, ale niedopuszczalen są kolizja z punktu widzenia osoby
 * Rodzaje zniżek (konferencja/warsztat):
-  * Zniżka dla studenta/ucznia
+  * Zniżki nie mogą wynosić 100%
+  * Zniżka dla studenta/ucznia 
   * Zniżka na zakup biletu na więcej niż jeden dzień konferencji
   * Zniżka za zakup biletów wcześniej (maksymalnie pół roku) 
 * Osoby
