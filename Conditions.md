@@ -24,6 +24,7 @@
   * Klient może zarezerwować miejsca dla dowolnej liczby osób.
   * Klient podaje przy rezerwacji adres e-mail i numer telefonu.
 ### Klienci — osoby prywatne
+  * Przy każdej rezerwacji na osobę prywatną, klienta traktujemy jako inną osobę.
   * Przy rezerwacji podają od razu dane uczestników: imię, nazwisko, firmę oraz to, czy uczestnik jest studentem.
   * Klient nie musi kupowac biletu dla siebie.
   * Klient musi opłacić rezerwację w ciągu tygodnia od jej dokonania.
