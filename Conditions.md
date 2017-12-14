@@ -30,7 +30,7 @@
   * Klient musi opłacić rezerwację w ciągu tygodnia od jej dokonania.
   * Dokonuje przelewu zgodnego z wyliczoną kwotą, nie są możliwe przelewy częściowe. Komentarzem do przelewu jest otrzymany przy rezerwacji numer zamówienia (OrderID).
   * Zwroty dla osób prywatnych są dokonywane w przypadku nieodbycia się warsztatów lub wysłania niepełnej kwoty za rezerwację.
-  * Klient dokonuje dopłaty jeśli uczestnik zadeklarowany jako student/uczeń nie okaże przy wejściu ważnej legitymacji.
+  * Uczestnik (uczeń/student) dokonuje dopłaty jeśli nie okaże przy wejściu ważnej legitymacji.
 ### Klienci — firmy
   * Firmy, które brały udział w poprzednich konferencjach mogą zarajestrować uczestników wykorzystując ten sam ClientID.
   * Firmy nie muszą od razu podawać danych uczetników, deklarują jedynie liczbę uczestników oraz ilu wśród nich jest studentów.
