@@ -1,15 +1,16 @@
 ## Warunki:
-### Warsztaty
-  * Pieniądze w przypadku nie odbycia się warsztatów zwrócone zostają klientom
+### Warsztaty 
+  * W ramach konferencji może odbywać się dowolna liczba warsztatów. Terminy warsztatów mogą na siebie nachodzić.
+  * Uczestnik nie może zarejestrować się na warsztaty, które ze sobą kolidują.
   * Do zapisania się na warsztaty konieczne jest posiadanie biletu na odpowiedni dzień konferencji.
   * Aby warsztaty mogły się odbyć, liczba zapisanych osób musi przekroczyć 25% liczby dostępnych miejsc (wartośc bazowa, organizator może ją zmodyfikować).
-  * Ilość maksymalna siedzeń, cena i ewentualne zniżki są ustalone osobno dla każdego warsztatu
-  * Może odbywać się wiele warsztatów na raz, ale niedopuszczalen są kolizja z punktu widzenia osoby
+  * Pieniądze w przypadku nieodbycia się warsztatów zwrócone zostają klientom
+  * Liczba miejsc, cena i ewentualne zniżki ustala organizator warsztatu.
 ### Zniżki na konferencje i warsztaty
-  * Zniżki nie mogą wynosić 100%
-  * Zniżka dla studenta/ucznia 
-  * Zniżka na zakup biletu na więcej niż jeden dzień konferencji
-  * Zniżka za zakup biletów wcześniej (maksymalnie pół roku) 
+  * Zniżki są ustalane osobno na każdą konferencję. 
+  * Organizator może ustalić dowolną liczbę procentowych progów zniżkowych uzależnionych od czasu dokonania rezerwacji.
+  * Zniżki nie mogą wynosić 100%, mogą wynosić 0%.
+  * Zniżka dla studenta/ucznia jest jednakowa na cały czas trwania konferencji. Zniżka studencka łączy się ze zniżką wynikającą z wcześniejszej rezerwacji.
 ### Osoby
   * Nikt nie może być zapisany na równoległe warsztaty/konferencje
   * Osoba ma wstęp tylko na dzień, na który ma bilet
