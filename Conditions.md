@@ -10,12 +10,12 @@
   * W ramach konferencji może odbywać się dowolna liczba warsztatów. Terminy warsztatów mogą na siebie nachodzić.
   * Uczestnik nie może zarejestrować się na warsztaty, które ze sobą kolidują.
   * Do zapisania się na warsztaty konieczne jest posiadanie biletu na odpowiedni dzień konferencji.
-  * Aby warsztaty mogły się odbyć, liczba zapisanych osób musi przekroczyć 25% liczby dostępnych miejsc (wartośc bazowa, organizator może ją zmodyfikować).
+  * Aby warsztaty mogły się odbyć, liczba zapisanych osób musi przekroczyć 25% liczby dostępnych miejsc.
   * Pieniądze w przypadku nieodbycia się warsztatów zwrócone zostają klientom
   * Liczba miejsc, cena i ewentualne zniżki ustala organizator warsztatu.
 ### Zniżki na konferencje i warsztaty
   * Zniżki są ustalane osobno na każdą konferencję.
-  * Zniżki wyliczane są na bazie ceny ustalonej na dany dzień konferencji.
+  * Zniżki wyliczane są na bazie ceny ustalonej na daną konferencję.
   * Organizator może ustalić dowolną liczbę procentowych progów zniżkowych uzależnionych od czasu dokonania rezerwacji.
   * Zniżki nie mogą wynosić 100%, mogą wynosić 0%.
   * Zniżka dla studenta/ucznia jest jednakowa na cały czas trwania konferencji. Zniżka studencka łączy się ze zniżką wynikającą z wczesnej rezerwacji.
