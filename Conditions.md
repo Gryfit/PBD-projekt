@@ -37,5 +37,8 @@
   * Firma przelewa opłatę za rezerwację w ciągu tygodnia od jej dokonania.
   * Opłata przy rezerwacji uwzględnia wszystkie zniżki, ewentualne różnice zostaną później wyrówane przez zwrot pieniędzy/dopłatę.
   * Firma uzupełnia dane uczestników najpóźniej do 2 tygodni przed początkiem konferencji. Jeśli tego nie zrobi, szczegóły zostaną uzgodnione telefonicznie.
+  ### Uwagi
+   * Każdemu ClientID odpowiada konto w systemie www.
+   * Do rezerwacji konieczne jest zalogowanie
   * Firma może zmienić liczbę deklarowanych uczniów/studentów przy wypełnianiu danych.
   * Firma dokonuje dopłaty jeśli uczestnik zadeklarowany jako student/uczeń nie okaże przy wejściu ważnej legitymacji.
