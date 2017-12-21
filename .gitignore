@@ -1,4 +1,3 @@
 # Tmp files
-*.vpp.bak_000f
-*.vpp.bak_001d
+*.vpp.bak*
 
