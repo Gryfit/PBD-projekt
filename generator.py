@@ -2,72 +2,87 @@ from faker import Faker
 from Lib import random
 from datetime import datetime, timedelta
 from faker.providers import BaseProvider
+import pymssql
+
+BEGINNING = datetime(2016, 1, 8, 22, 40, 1)
+END = datetime(2018, 1, 8, 22, 40, 1)
 
 fake = Faker('en_US')
 
-#nie wiem jak zrobić z Clients bo to jest pojedyńczy klucz główny który się nie chce inkrementować ;-;
-#poprawić conferenceDays w bazie na IDENTITY bo inaczej to się nie da :P
+server = "mssql.iisg.agh.edu.pl ENSURE FAIL"
+user = "kbak"
+password = "r1kAfWHp"
 
-#Open
-Conferences = open("Conferences.txt", 'w+')
-ConferenceDiscounts = open("ConferenceDiscounts.txt", 'w+')
-ConferenceDays = open("ConferenceDays.txt", 'w+')
-Workshops = open("Workshops.txt", 'w+')
-WorkshopReservations = open("WorkshopReservations.txt",'w+')
-Tickets = open("Tickets.txt", 'w+')
-People = open("People.txt", 'w+')
-Orders = open("Orders.txt", 'w+')
-Payments = open("Payments.txt", 'w+')
-CompanyClients = open("CompanyClients.txt", 'w+')
-PrivateClients = open("PrivateClients.txt", 'w+')
-CompanyList = open("PrivateClients.txt", 'w+')
-Students = open("Students.txt", 'w+')
+conn = pymssql.connect(server, user, password, "kbak_a")
+cursor = conn.cursor()
 
-
-#Desc
-Conferences.write("StartDate,EndDate,Seats,BasePrice,StudentDiscount\n")
-ConferenceDiscounts.write("ConferenceID,UntilDate,Discount\n")
-ConferenceDays.write("ConferenceID,Day\n")
-Workshops.write("ConferenceDayID,ConferenceDaysConferenceID,Start,Duration,Seats,BasePrice\n")
-WorkshopReservations.write("WorkshopID,TicketID,TicketsPersonID\n")
-Tickets.write("PersonID,ConferenceDayID,OrderID,ConferenceDaysConferenceID\n")
-People.write("CompanyID,LastName,FistName\n")
-Orders.write("ClientID,OrderDate,Email,Phone\n")
-Payments.write("OrderID,PaymentDate,PaymentValue,BankAccount\n")
-CompanyClients.write("CientID,ComapnyID\n")
-PrivateClients.write("ClientID,PersonID\n")
-CompanyList.write("CompanyName\n")
-Students.write("PersonID\n")
-#Write
-for ConferenceID in range(0, 1000):
-    StartDate = fake.date_time()
-    DaysInteger = random.randint(1, 3)
-    DaysTimeDate = timedelta(DaysInteger)
-    EndDate = StartDate + DaysTimeDate
+for ConferenceID in range(1, 1001):
+    StartDate = fake.date_time_between_dates(BEGINNING,END)
+    Duration = timedelta(random.randint(1, 3))
+    EndDate = StartDate + Duration
     Seats = random.randint(100, 1000)
-    BasePrice = random.randint(10, 50)  # dlaczego tak mało ?
+    BasePrice = random.randint(1000, 50000)/100
     StudentDiscount = random.randint(0, 50)
-    Conferences.write("%s,%s,%u,%u,%u\n" % (StartDate, EndDate, Seats, BasePrice, StudentDiscount))
-    dis = random.randint(1, 3)
-    for disc in range(0, dis):
-        UntilDate = StartDate - timedelta(30*disc)
-        Discount = random.randint(0, 25)
-        ConferenceDiscounts.write("%u,%s,%u\n" % (ConferenceID, UntilDate, Discount))
-    for days in range(0,DaysInteger):
-        Day = StartDate + timedelta(days)
-        ConferenceDays.write("%u,%s\n" % (ConferenceID, Day))
 
-#Close
-Conferences.close()
-ConferenceDiscounts.close()
-ConferenceDays.close()
-Workshops.close()
-WorkshopReservations.close()
-Tickets.close()
-People.close()
-Orders.close()
-Payments.close()
-CompanyClients.close()
-PrivateClients.close()
-CompanyList.close()
-Students.close()
+    cursor.execute('INSERT INTO Conferences VALUES (%s,%s,%u,%.2f,%u)' %
+                   (StartDate,EndDate,Seats,BasePrice,StudentDiscount))
+    conn.commit()
+    Temp = StartDate
+    for Levels in range(random.randint(1, 3)):
+        DiscountLevel = Temp - timedelta(30)
+        cursor.execute('INSERT INTO ConferencesDiscounts VALUES (%u,%s,%u)' %
+                       (ConferenceID,DiscountLevel,random.randint(1, 50)))
+        conn.commit()
+        Temp = DiscountLevel
+for CompanyID in range(1,501):
+    CompanyName = fake.company()
+    cursor.execute('INSERT INTO CompanyList VALUES (%s)' %
+                   CompanyName)
+    conn.commit()
+for ClientID in range(1, 10001):
+    Email = fake.email()
+    Phone = fake.phone_number()
+    cursor.execute('INSERT INTO Clients VALUES (%s,%s)' %
+                   (Email, Phone))
+    conn.commit()
+    if random.randint(0, 1) == 1:
+        cursor.execute('INSERT INTO CompanyClients VALUES (%u,%u)' %
+                       (ClientID, random.randint(1, 501)))
+        conn.commit()
+
+conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Conferences.write("StartDate,EndDate,Seats,BasePrice,StudentDiscount\n")
+# ConferenceDiscounts.write("ConferenceID,UntilDate,Discount\n")
+# ConferenceDays.write("ConferenceID,Day\n")
+# Workshops.write("ConferenceDayID,ConferenceDaysConferenceID,Start,Duration,Seats,BasePrice\n")
+# WorkshopReservations.write("WorkshopID,TicketID,TicketsPersonID\n")
+# Tickets.write("PersonID,ConferenceDayID,OrderID,ConferenceDaysConferenceID\n")
+# People.write("CompanyID,LastName,FistName\n")
+# Orders.write("ClientID,OrderDate,Email,Phone\n")
+# Payments.write("OrderID,PaymentDate,PaymentValue,BankAccount\n")
+# CompanyClients.write("CientID,ComapnyID\n")
+# PrivateClients.write("ClientID,PersonID\n")
+# CompanyList.write("CompanyName\n")
+# Students.write("PersonID\n")
