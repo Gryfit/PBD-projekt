@@ -1,53 +1,44 @@
-CREATE FUNCTION FUNC_DiscountedPrice
-  (
-    @ConferenceID int,
-    @OrderDate datetime,
-    @IsStudent bit
-  )
-  RETURNS decimal(10,2)
-AS
+CREATE FUNCTION dbo.FUNC_ConferenceDiscount(@ConferenceID int, @OrderDate datetime) 
+  RETURNS decimal(10,2) AS
 BEGIN
   RETURN
     (
-      SELECT BasePrice * (@IsStudent * StudentDiscount / 100) *
-        (SELECT TOP 1 
+         SELECT TOP 1 Discount
          FROM ConferenceDiscounts
-         WHERE ConferenceID = @ConferenceID AND 
-               @OrderDate <= UntilDate
-         ORDER BY UntilDate) / 100
-    );
+         WHERE ConferenceID = @ConferenceID AND @OrderDate <= UntilDate
+         ORDER BY UntilDate
+    )
 END
-GO
 
-CREATE FUNCTION FUNC_TicketPrice
-  (
-    @TicketID
-  )
-  RETURNS decimal(10,2)
-AS
+CREATE FUNCTION dbo.FUNC_IsStudent(@PersonID int) 
+  RETURNS bit AS
+BEGIN
+  RETURN( CASE
+            WHEN EXISTS(SELECT 1 FROM Students WHERE PersonID = @PersonID) 
+            THEN 1
+            ELSE 0
+          END
+      )
+END
+
+ALTER FUNCTION dbo.FUNC_TicketPrice(@TicketID int) 
+  RETURNS decimal(10,2) AS
 BEGIN
   RETURN
     (
-      SELECT FUNC_DiscountedPrice(
-           cd.ConferenceID, 
-           o.OrderDate, 
-           (SELECT COUNT (*) FROM Students as s WHERE s.PersonID = t.PersonID))  
+      SELECT c.BasePrice * dbo.FUNC_ConferenceDiscount(t.ConferenceID, o.OrderDate) / 100 *
+        dbo.FUNC_IsStudent(t.PersonID) * (1 - StudentDiscount) / 100
       FROM Tickets AS t
       JOIN Orders AS o
            ON o.OrderID = t.OrderID
-      JOIN ConferenceDays AS cd
-           ON cd.ConferenceDayID = t.ConferenceDayID
+      JOIN Conferences AS c
+           ON c.ConferenceID = t.ConferenceID
       WHERE t.TicketID = @TicketID
-    );
+    )
 END
-GO
 
-CREATE FUNCTION FUNC_WorkshopsPrice
-  (
-    @TicketID
-  )
-  RETURNS decimal(10,2)
-AS
+CREATE FUNCTION dbo.FUNC_WorkshopsPrice(@TicketID) 
+  RETURNS decimal(10,2) AS
 BEGIN
   RETURN
     (
@@ -58,4 +49,3 @@ BEGIN
       WHERE wr.TicketID = @TicketID
     ) + FUNC_TicketPrice(@TicketID);
 END
-GO
