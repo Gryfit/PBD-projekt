@@ -49,4 +49,12 @@ AS
   HAVING COUNT(w.WorkshopID) < w.Seats
 GO
 
-
+CREATE VIEW VIEW_PaymentSummary
+AS
+  SELECT c.ClientID, c.Email, c.Phone, o.OrderID, t.TicketID, FUNC_FinalTicketPrice(t.TicketID) as 'TicketPrice'
+  FROM Clients
+  JOIN Orders AS o
+       ON o.ClientID = c.ClientID
+  JOIN Tickets AS t
+       ON t.OrderID = o.OrderID
+GO
