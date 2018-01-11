@@ -26,4 +26,21 @@ AS
   HAVING SUM(w.WorkshopID) < w.Seats
 GO
 
-CREATE VIEW VIEW_
+CREATE VIEW VIEW_OrderTickets
+AS
+  SELECT o.OrderID,
+         OrderDate,
+         Email,
+         Phone,
+         (SELECT COUNT (*) FROM t) AS 'TicketsOrdered',
+         (SELECT COUNT (*) 
+          FROM t JOIN People AS p 
+               ON p.PersonID = t.PersonID
+          JOIN Students AS s 
+               ON s.PersonID = p.PersonID
+         ) AS 'StudentTickets'
+  FROM Orders AS o
+  JOIN Tickets AS t
+       ON t.OrderID = o.OrderID
+  GROUP BY t.ConferenceDayID, o.OrderID, OrderDate, Email, Phone, 
+GO
