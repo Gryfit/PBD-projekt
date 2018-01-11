@@ -21,7 +21,7 @@ BEGIN
       )
 END
 
-ALTER FUNCTION dbo.FUNC_TicketPrice(@TicketID int) 
+CREATE FUNCTION dbo.FUNC_TicketPrice(@TicketID int) 
   RETURNS decimal(10,2) AS
 BEGIN
   RETURN
