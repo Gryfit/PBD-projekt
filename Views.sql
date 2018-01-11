@@ -1,59 +1,16 @@
-CREATE VIEW VIEW_WorkshopSeats
-AS
-  SELECT w.WorkshopID,
-         w.ConferenceID,
-         w.ConferenceDayID,
-         w.Seats AS 'TotalSeats',
-         wr.SeatsSold,
-         w.Seats - wr.SeatsSold AS 'SeatsLeft'
-  FROM Workshops AS w
-  JOIN (SELECT WorkshopID, COUNT(WorkshopID) AS 'SeatsSold' 
-        FROM Workshops GROUP BY WorkshopID
-       ) AS wr
-       ON w.WorkshopID = wr.WorkshopID
-  GROUP BY w.WorkshopID, w.ConferenceID, w.ConferenceDayID, w.Seats, wr.SeatsSold
-GO
-
-CREATE VIEW VIEW_AvaliableWorkshops
-AS
-  SELECT w.WorkshopID,
-         w.ConferenceID,
-         w.ConferenceDayID
-  FROM Workshops AS w
-  JOIN WorkshopReservations AS wr
-       ON w.WorkshopID = wr.WorkshopID
-  GROUP BY w.WorkshopID, w.ConferenceID, w.ConferenceDayID, w.Seats
-  HAVING SUM(w.WorkshopID) < w.Seats
-GO
-
 CREATE VIEW VIEW_OrderTickets
 AS
-  SELECT o.OrderID,
-         OrderDate,
-         Email,
-         Phone,
-         (SELECT COUNT (*) FROM t) AS 'TicketsOrdered',
+  SELECT o.OrderID, o.OrderDate,
+         c.Email, c.Phone,
+         (SELECT COUNT (*) FROM Tickets WHERE OrderID = o.OrderID) AS 'TicketsOrdered',
          (SELECT COUNT (*) 
-          FROM t JOIN People AS p 
-               ON p.PersonID = t.PersonID
+          FROM Tickets AS t 
           JOIN Students AS s 
-               ON s.PersonID = p.PersonID
+               ON s.PersonID = t.PersonID
          ) AS 'StudentTickets'
   FROM Orders AS o
-  JOIN Tickets AS t
-       ON t.OrderID = o.OrderID
-  GROUP BY t.ConferenceDayID, o.OrderID, OrderDate, Email, Phone, 
-GO
-
-CREATE VIEW VIEW_ConferencePopularity
-AS
-  SELECT c.ConferenceID, COUNT(c.ConferenceID) AS 'SeatsReserved', 
-         c.Seats - COUNT(c.ConferenceID) AS 'SeatsLeft', c.Seats
-  FROM Conferences AS c
-  JOIN Tickets AS t
-       ON t.ConferenceID = c.ConferenceID
-  WHERE t.OrderID != NULL
-  GROUP BY c.ConferenceID, Seats
+  JOIN Clients AS c
+       ON c.ClientID = o.ClientID
 GO
 
 CREATE VIEW VIEW_ConferencePopularity
@@ -79,3 +36,17 @@ AS
   WHERE t.OrderID != NULL
   GROUP BY wr.WorkshopID, w.Seats
 GO
+
+CREATE VIEW VIEW_AvaliableWorkshops
+AS
+  SELECT w.WorkshopID,
+         w.ConferenceID,
+         w.ConferenceDayID
+  FROM Workshops AS w
+  JOIN WorkshopReservations AS wr
+       ON w.WorkshopID = wr.WorkshopID
+  GROUP BY w.WorkshopID, w.ConferenceID, w.ConferenceDayID, w.Seats
+  HAVING COUNT(w.WorkshopID) < w.Seats
+GO
+
+
