@@ -5,10 +5,16 @@
 
 ## Views
 ```sql
-FUNC_ConferenceDiscount(@ConferenceID int, @OrderDate datetime)
-FUNC_IsStudent(@PersonID int)
-FUNC_TicketPrice(@TicketID int)
-FUNC_WorkshopsPrice(@TicketID)
+VIEW_OrderTickets           [OrderID OrderDate Email Phone TicketsOrdered StudentTickets]
+VIEW_ConferencePopularity   [ConferenceID PercentSold SeatsSold Seats]
+VIEW_WorkshopPopularity     [WorkshopID PercentSold SeatsSold Seats]
+VIEW_AvaliableWorkshops     [WorkshopID ConferenceID ConferenceDayID]
+VIEW_PaymentSummary         [ClientID Email Phone OrderID TicketID TicketPrice]
+```
+---
+ToDo:
+```sql
+FUNC
 ```
 
 ## Functions
