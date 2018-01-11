@@ -1,4 +1,4 @@
-CREATE VIEW VIEW_OrderTickets
+CREATE VIEW dbo.VIEW_OrderTickets
 AS
   SELECT o.OrderID, o.OrderDate,
          c.Email, c.Phone,
@@ -11,9 +11,8 @@ AS
   FROM Orders AS o
   JOIN Clients AS c
        ON c.ClientID = o.ClientID
-GO
 
-CREATE VIEW VIEW_ConferencePopularity
+CREATE VIEW dbo.VIEW_ConferencePopularity
 AS
   SELECT c.ConferenceID, (COUNT(c.ConferenceID) / c.Seats * 100) AS 'PercentSold',
          COUNT(c.ConferenceID) AS 'SeatsSold', c.Seats
@@ -22,9 +21,8 @@ AS
        ON t.ConferenceID = c.ConferenceID
   WHERE t.OrderID != NULL
   GROUP BY c.ConferenceID, Seats
-GO
 
-CREATE VIEW VIEW_WorkshopPopularity
+CREATE VIEW dbo.VIEW_WorkshopPopularity
 AS
   SELECT wr.WorkshopID, (COUNT(wr.WorkshopID) * 100 / w.Seats) AS 'PercentSold',
          COUNT(wr.WorkshopID) AS 'SeatsSold', w.Seats
@@ -35,9 +33,8 @@ AS
        ON wr.WorkshopID = w.WorkshopID
   WHERE t.OrderID != NULL
   GROUP BY wr.WorkshopID, w.Seats
-GO
 
-CREATE VIEW VIEW_AvaliableWorkshops
+CREATE VIEW dbo.VIEW_AvaliableWorkshops
 AS
   SELECT w.WorkshopID,
          w.ConferenceID,
@@ -47,9 +44,8 @@ AS
        ON w.WorkshopID = wr.WorkshopID
   GROUP BY w.WorkshopID, w.ConferenceID, w.ConferenceDayID, w.Seats
   HAVING COUNT(w.WorkshopID) < w.Seats
-GO
 
-CREATE VIEW VIEW_PaymentSummary
+CREATE VIEW dbo.VIEW_PaymentSummary
 AS
   SELECT c.ClientID, c.Email, c.Phone, o.OrderID, t.TicketID, FUNC_FinalTicketPrice(t.TicketID) as 'TicketPrice'
   FROM Clients
@@ -57,4 +53,3 @@ AS
        ON o.ClientID = c.ClientID
   JOIN Tickets AS t
        ON t.OrderID = o.OrderID
-GO
