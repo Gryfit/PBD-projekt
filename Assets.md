@@ -11,7 +11,7 @@ VIEW_WorkshopPopularity     [WorkshopID PercentSold SeatsSold Seats]
 VIEW_AvaliableWorkshops     [WorkshopID ConferenceID ConferenceDayID]
 VIEW_PaymentSummary         [ClientID Email Phone OrderID TicketID TicketPrice]
 ```
----
+
 ToDo:
 ```sql
 VIEW_UnpaidOrders
@@ -25,7 +25,7 @@ bit           FUNC_IsStudent(@PersonID int)
 decimal(10,2) FUNC_TicketPrice(@TicketID int)
 decimal(10,2) FUNC_WorkshopsPrice(@TicketID)
 ```
----
+
 Todo:
 ```sql
 TABLE         FUNC_WorkshopParticipants(@WorkshopID int)
