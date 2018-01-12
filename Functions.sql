@@ -49,3 +49,35 @@ BEGIN
       WHERE wr.TicketID = @TicketID
     ) + FUNC_TicketPrice(@TicketID);
 END
+
+CREATE FUNCTION dbo.FUNC_ConferenceParticipants(@ConferenceID) 
+  RETURNS TABLE AS
+BEGIN
+  RETURN
+    (
+      SELECT Lastname + ' ' + Firstname AS Name, ISNULL(CompanyName, '')
+      FROM People AS p 
+      JOIN CompanyList AS cl
+           ON p.CompanyID = cl.CompanyID
+      JOIN Tickets AS t
+           ON t.PersonID = p.PersonID
+      WHERE t.ConferenceID = @ConferenceID
+    )
+END
+
+CREATE FUNCTION dbo.FUNC_WorkshopParticipants(@WorkshopID) 
+  RETURNS TABLE AS
+BEGIN
+  RETURN
+    (
+      SELECT Lastname + ' ' + Firstname AS Name, ISNULL(CompanyName, '')
+      FROM People AS p 
+      JOIN CompanyList AS cl
+           ON p.CompanyID = cl.CompanyID
+      JOIN Tickets AS t
+           ON t.PersonID = p.PersonID
+      JOIN WorkshopReservations AS wr
+           ON wr.TicketID = t.TicketID
+      WHERE wr.WorkshopID = @WorkshopID
+    )
+END
