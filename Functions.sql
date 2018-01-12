@@ -81,3 +81,21 @@ BEGIN
       WHERE wr.WorkshopID = @WorkshopID
     )
 END
+
+
+CREATE FUNCTION dbo.FUNC_ConferenceDayParticipants(@ConferenceID, @Day datetime) 
+  RETURNS TABLE AS
+BEGIN
+  RETURN
+    (
+      SELECT Lastname + ' ' + Firstname AS Name, ISNULL(CompanyName, '')
+      FROM People AS p 
+      JOIN CompanyList AS cl
+           ON p.CompanyID = cl.CompanyID
+      JOIN Tickets AS t
+           ON t.PersonID = p.PersonID
+      JOIN ConferenceDays AS cd
+           ON cd.ConferenceID = t.ConferenceID
+      WHERE t.ConferenceID = @ConferenceID AND cd.Day = @Day 
+    )
+END
