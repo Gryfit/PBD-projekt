@@ -24,12 +24,12 @@ decimal(10,2) FUNC_ConferenceDiscount(@ConferenceID int, @OrderDate datetime)
 bit           FUNC_IsStudent(@PersonID int) 
 decimal(10,2) FUNC_TicketPrice(@TicketID int)
 decimal(10,2) FUNC_WorkshopsPrice(@TicketID)
+TABLE         FUNC_ConferenceParticipants(@ConferenceID int)
+TABLE         FUNC_WorkshopParticipants(@WorkshopID int)
 ```
 
 Todo:
 ```sql
-TABLE         FUNC_WorkshopParticipants(@WorkshopID int)
-TABLE         FUNC_ConferenceParticipants(@ConferenceID int)
 TABLE         FUNC_ConferenceDayParticipants(@ConferenceID int, @Day datetime)
 TABLE         FUNC_OrderDetails(@OrderID)
 ```
