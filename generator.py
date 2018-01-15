@@ -11,7 +11,7 @@ fake = Faker('en_US')
 
 server = "mssql.iisg.agh.edu.pl ENSURE FAIL"
 user = "kbak"
-password = "r1kAfWHp"
+password = "------"
 
 conn = pymssql.connect(server, user, password, "kbak_a")
 cursor = conn.cursor()
@@ -45,11 +45,17 @@ for ClientID in range(1, 10001):
     cursor.execute('INSERT INTO Clients VALUES (%s,%s)' %
                    (Email, Phone))
     conn.commit()
+    numOfOrders =  random.randint(2, 5)
     if random.randint(0, 1) == 1:
         cursor.execute('INSERT INTO CompanyClients VALUES (%u,%u)' %
                        (ClientID, random.randint(1, 501)))
+        numOfOrders = random.randint(100, 200)
         conn.commit()
-
+    for Orders in range (1,numOfOrders):
+        OrderDate =fake.date_time_between_dates(BEGINNING,END);
+        cursor.execute('INSERT INTO Orders VALUES (%u,%s)' %
+                       (ClientID, fake.date_time_between_dates(BEGINNING,END)))
+        conn.commit()
 conn.close()
 
 
