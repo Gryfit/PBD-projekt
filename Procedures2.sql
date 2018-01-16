@@ -18,7 +18,7 @@ AS
 
 	WHILE @StD < @EnD
 	BEGIN
-		INSERT ConferenceDays Values (@ConferenceID,@i,@StD)
+		INSERT ConferenceDays Values (@i,@ConferenceID,@StD)
 		SET @i = (@i +1)
 		SET @StD = DATEADD(day,1,@StD)
 	END
