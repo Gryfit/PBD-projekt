@@ -1,9 +1,9 @@
-CREATE FUNCTION dbo.WorkshopPrice(@TicketID) 
+CREATE FUNCTION dbo.WorkshopPrice(@TicketID int) 
   RETURNS decimal(10,2) AS
 BEGIN
   RETURN
     (
-      SELECT SUM(w.BasePrice)
+      SELECT ISNULL(SUM(w.BasePrice), 0)
       FROM WorkshopReservations AS wr
       JOIN Workshops AS w
            ON wr.WorkshopID = w.WorkshopID
