@@ -6,6 +6,6 @@ AS
   JOIN Tickets AS t
        ON t.TicketID = wr.WorkshopID
   JOIN Workshops AS w
-       ON wr.WorkshopID = w.WorkshopID
+       ON wr.WorkshopID = w.WorkshopID AND w.Cancelled = 0
   WHERE t.OrderID != NULL
   GROUP BY wr.WorkshopID, w.Seats
