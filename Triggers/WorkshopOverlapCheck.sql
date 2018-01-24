@@ -1,4 +1,4 @@
-ALTER TRIGGER WorkshopOverlapCheck ON WorkshopReservations FOR INSERT AS 
+CREATE TRIGGER WorkshopOverlapCheck ON WorkshopReservations FOR INSERT AS 
 BEGIN 
     DECLARE @TicketID AS int 
     SET @TicketID = (SELECT TicketID FROM inserted)
