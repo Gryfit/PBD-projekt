@@ -5,5 +5,5 @@ AS
   FROM Conferences AS c
   JOIN Tickets AS t
        ON t.ConferenceID = c.ConferenceID
-  WHERE t.OrderID != NULL
+  WHERE t.OrderID != NULL AND c.Cancelled = 0
   GROUP BY c.ConferenceID, Seats, c.StartDate, c.EndDate
