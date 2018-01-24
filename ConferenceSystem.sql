@@ -4,7 +4,7 @@ CREATE TABLE Payments (PaymentID int NOT NULL, OrderID int NOT NULL, PaymentDate
 CREATE TABLE CompanyList (CompanyID int IDENTITY NOT NULL, CompanyName varchar(50) NOT NULL, PRIMARY KEY (CompanyID));
 CREATE TABLE Students (PersonID int NOT NULL UNIQUE);
 CREATE TABLE People (PersonID int IDENTITY NOT NULL, CompanyID int NULL, LastName varchar(30) NOT NULL CHECK(LastName like '[A-Z]%'), FirstName varchar(30) NOT NULL CHECK(FirstName not like '% %' and FirstName like '[A-Z]%'), PRIMARY KEY (PersonID));
-CREATE TABLE Conferences (ConferenceID int IDENTITY NOT NULL, StartDate datetime NOT NULL, EndDate datetime NOT NULL, Seats int NOT NULL, BasePrice decimal(10, 2) NOT NULL, StudentDiscount int DEFAULT 0 NOT NULL CHECK(StudentDiscount <= 100), Cancelled bit DEFAULT 0 NULL, PRIMARY KEY (ConferenceID));
+CREATE TABLE Conferences (ConferenceID int IDENTITY NOT NULL, StartDate datetime NOT NULL, EndDate datetime NOT NULL, Seats int NOT NULL, BasePrice decimal(10, 2) NOT NULL, StudentDiscount int DEFAULT 0 NOT NULL CHECK(StudentDiscount <= 100), Cancelled bit DEFAULT 0 NOT NULL, PRIMARY KEY (ConferenceID));
 CREATE TABLE Tickets (TicketID int IDENTITY NOT NULL, OrderID int NULL, PersonID int NULL, ConferenceID int NOT NULL, ConferenceDayID int NOT NULL, PRIMARY KEY (TicketID));
 CREATE TABLE ConferenceDays (ConferenceDayID int NOT NULL, ConferenceID int NOT NULL, Day datetime NOT NULL, Cancelled bit DEFAULT 0 NOT NULL, PRIMARY KEY (ConferenceDayID, ConferenceID));
 CREATE TABLE Orders (OrderID int IDENTITY NOT NULL, ClientID int NOT NULL, OrderDate datetime NOT NULL, PRIMARY KEY (OrderID));
