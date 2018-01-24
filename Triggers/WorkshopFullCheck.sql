@@ -1,4 +1,4 @@
-CREATE TRIGGER WorkshopFullCheck ON dbo.WorkshopReservations FOR INSERT AS 
+CREATE TRIGGER WorkshopFullCheck ON dbo.WorkshopReservations AFTER INSERT AS 
 BEGIN 
     DECLARE @TicketID AS int 
     SET @TicketID = (SELECT TicketID FROM inserted)
@@ -14,13 +14,10 @@ BEGIN
         WHERE wr.WorkshopID = @WorkshopID
         GROUP BY TicketID, w.Seats
         )
-    IF @vacancy > 0
-    BEGIN
-       INSERT INTO WorkshopReservations (WorkshopID, TicketID)
-       VALUES (@WorkshopID, @TicketID) 
-    END 
-    ELSE
+    IF @vacancy <= 0
     BEGIN
        RAISERROR ('There are no vacant seats at given workshop.',-1,-1)
+       ROLLBACK TRANSACTION
+       RETURN
     END 
 END 
