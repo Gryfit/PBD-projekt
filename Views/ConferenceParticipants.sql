@@ -7,3 +7,5 @@ AS
        ON p.CompanyID = cl.CompanyID
   JOIN Tickets AS t
        ON t.PersonID = p.PersonID
+  JOIN ConferenceDays AS cd
+       ON cd.ConferenceID = t.ConferenceID AND cd.ConferenceDayID = t.ConferenceDayID AND cd.Cancelled = 0
