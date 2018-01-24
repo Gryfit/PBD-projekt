@@ -1,29 +1,16 @@
-CREATE TRIGGER PriceTrasholdDateCheck ON dbo.WorkshopReservations FOR INSERT AS 
+CREATE TRIGGER PriceTrasholdDateCheck ON dbo.ConferenceDiscounts AFTER INSERT AS 
 BEGIN 
-    DECLARE @TicketID AS int 
-    SET @TicketID = (SELECT TicketID FROM inserted)
-    DECLARE @WorkshopID AS int 
-    SET @WorkshopID = (SELECT WorkshopID FROM inserted)
+    DECLARE @ConferenceID AS int 
+    SET @ConferenceID = (SELECT ConferenceID FROM inserted)
+    DECLARE @UntilDate AS datetime
+    SET @UntilDate = (SELECT UntilDate FROM inserted)
+    DECLARE @Discount AS int 
+    SET @Discount = (SELECT Discount FROM inserted)
     
-    DECLARE @vacancy AS int
-    SET @vacancy = (
-        SELECT w.Seats - COUNT(TicketID)
-        FROM Workshops AS w
-        JOIN WorkshopReservations AS wr
-        ON wr.WorkshopID = w.WorkshopID
-        WHERE wr.WorkshopID = @WorkshopID
-        GROUP BY TicketID, w.Seats
-        )
-    IF @vacancy > 0
+    IF @UntilDate > GETDATE()
     BEGIN
-       INSERT INTO WorkshopReservations (WorkshopID, TicketID)
-       VALUES (@WorkshopID, @TicketID) 
-    END 
-    ELSE
-    BEGIN
-       RAISERROR ('There are no vacant seats at given workshop.',-1,-1)
-    END 
+        RAISERROR ('You try to set discount price for date in the past.',-1,-1)
+        ROLLBACK TRANSACTION
+        RETURN
+    END
 END 
-
-    © 2018 GitHub, Inc.
-    Terms
