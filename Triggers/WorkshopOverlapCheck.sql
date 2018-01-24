@@ -1,4 +1,4 @@
-UPDATE TRIGGER WorkshopOverlapCheck ON dbo.WorkshopReservations FOR INSERT AS 
+CREATE TRIGGER WorkshopOverlapCheck ON dbo.WorkshopReservations AFTER INSERT AS 
 BEGIN 
     DECLARE @TicketID AS int 
     SET @TicketID = (SELECT TicketID FROM inserted)
@@ -23,7 +23,7 @@ BEGIN
     IF @impossible > 0
     BEGIN
       RAISERROR ('The participant has reserved another Workshop at the time',-1,-1)
+      ROLLBACK TRANSACTION
+      RETURN
     END
-    ELSE
-      INSERT INTO Workshop SELECT * FROM inserted
 END 
