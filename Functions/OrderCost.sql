@@ -1,10 +1,5 @@
 CREATE FUNCTION OrderCost(@OrderID int) 
 AS
-    SELECT o.OrderID, o.OrderDate, LastName, FirstName, dbo.IsStudent(t.PersonID) AS IsStudent,
-    dbo.TicketPrice(t.TicketID) AS 'ConferencePrice', dbo.WorkshopPrice(t.TicketID) AS 'WorkshopPrice',
-    dbo.TicketPrice(t.TicketID) + dbo.WorkshopPrice(t.TicketID) AS 'TotalPrice'
+    SELECT SUM(TicketPrice (t.TicketID) + WorkshopPrice(t.TicketID))
     FROM Tickets AS t
-    JOIN Orders AS o
-         ON o.OrderID = t.OrderID
-    LEFT JOIN People AS p
-         ON p.PersonID = t.PersonID
+    GROUP BY OrderID, TicketID
