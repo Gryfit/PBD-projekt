@@ -1,5 +1,6 @@
-CREATE VIEW ClientPayments AS
-    SELECT oc.OrderID, o.OrderDate, ConferenceID, CompanyName, Phone, SUM(TotalPrice) AS HasToPay, 
+ALTER VIEW ClientPayments AS
+    SELECT oc.OrderID, o.OrderDate, (SELECT Top 1 PaymentDate FROM Payments AS p WHERE p.OrderID = oc.OrderID ORDER BY PaymentDate DESC) AS 'LastPayment',
+        ConferenceID, CompanyName, Phone, SUM(TotalPrice) AS HasToPay, 
         (SELECT SUM(PaymentValue) FROM Payments AS p WHERE p.OrderID = oc.OrderID GROUP BY p.OrderID) AS AlreadyPaid
     FROM OrderCostDetails AS oc
     JOIN Orders AS o
