@@ -3,7 +3,7 @@ CREATE FUNCTION dbo.WorkshopPrice(@TicketID int)
 BEGIN
   RETURN
     (
-      SELECT ISNULL(SUM(w.BasePrice), 0)
+      SELECT ISNULL(SUM(w.BasePrice), 0) * (1 - w.Cancelled)
       FROM WorkshopReservations AS wr
       JOIN Workshops AS w
            ON wr.WorkshopID = w.WorkshopID
