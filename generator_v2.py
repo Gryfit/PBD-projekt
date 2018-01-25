@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 from faker.providers import BaseProvider
 import pymssql
 
-BEGINNING = datetime(2017, 1, 8, 22, 40, 1)
-END = datetime(2018, 1, 8, 22, 40, 1)
+BEGINNING = datetime(2016, 12, 8, 22, 40, 1)
+END = datetime(2018, 10, 8, 22, 40, 1)
 
 fake = Faker('en_GB')
 server = "mssql.iisg.agh.edu.pl"
@@ -31,8 +31,6 @@ for ConferenceID in range(1, 40): #3 lata razy srednio 2 konferencje
     cursor.execute('INSERT INTO Conferences VALUES (\'%s\',\'%s\',%u,%u,%u, 0)' %
                    (StartDate,EndDate,Seats,BasePrice,StudentDiscount))
     conn.commit()
-    cursor.execute("EXEC GenerateDays @ConferenceID = %u" % ConferenceID)
-    conn.commit()
 
     # Tworzymy znizki dla konferencji
     Temp = StartDate
@@ -44,15 +42,21 @@ for ConferenceID in range(1, 40): #3 lata razy srednio 2 konferencje
         Temp = DiscountLevel
 
     for day in range(1,D+1): # tworzymy warsztaty na konferencji
-        for WorkshopID in range(1, 5):
-            StartOfWorkshop = StartDate 
-            StartOfWorkshop = StartOfWorkshop.replace(hour=10, minute=00, second=00)
+        StartOfWorkshop = StartDate 
+        StartOfWorkshop = StartOfWorkshop.replace(hour=10, minute=00, second=00)
+        for WorkshopID in range(1, 2):
+            Length = timedelta(0,0,0,0,0,random.randint(1,2))
             cursor.execute('INSERT INTO Workshops VALUES (%u,%u,\'%s\',\'%s\',%u,%u, %u)' %
                            (
-                           day, ConferenceID, StartOfWorkshop, StartOfWorkshop + timedelta(0,0,0,0,0,random.randint(1,3)), random.randint(10, 25),
+                           day, ConferenceID, StartOfWorkshop, StartOfWorkshop + Length, random.randint(10, 25),
                            random.randint(1, 5) * 5, 0))
             conn.commit()
-            StartOfWorkshop = StartOfWorkshop + timedelta(0,0,0,0,0,random.randint(1,3))
+            cursor.execute('INSERT INTO Workshops VALUES (%u,%u,\'%s\',\'%s\',%u,%u, %u)' %
+                           (
+                           day, ConferenceID, StartOfWorkshop, StartOfWorkshop + Length + timedelta(0,0,0,0,0,1), random.randint(10, 25),
+                           random.randint(1, 5) * 5, 0))
+            conn.commit()
+            StartOfWorkshop = StartOfWorkshop + Length + timedelta(0,0,0,0,0,2)
 
     # Teraz zajmiemy sie generowaniem zamowien na te konferencje
     FreePlaces = random.randint(0,20) # Ile ma zostac wolnych miejsc
@@ -111,6 +115,8 @@ for ConferenceID in range(1, 40): #3 lata razy srednio 2 konferencje
                     cursor.execute('INSERT INTO Tickets VALUES ( %u, %u, %u, %u )' % (OrderID, PersonID, ConferenceID, day[0]))
                     conn.commit()
                     # teraz wybieramy mu warsztaty
+                    #cursor.execute('')
+                    #cursor.execute('INSERT INTO dbo.WorkshopReservations VALUES (%u, )
                     # TODO 
             
             # koniec przydzielnia biletow dla jednej osoby
