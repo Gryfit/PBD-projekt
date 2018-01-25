@@ -1,6 +1,6 @@
 ALTER PROC AddClient
     @Email VARCHAR(255),
-    @Phone VARCHAR(14),
+    @Phone VARCHAR(50),
     @CompanyName  VARCHAR(50)
 AS
     DECLARE @compID AS int
@@ -15,7 +15,7 @@ AS
     )
     VALUES
     (   @Email, -- Email - varchar(255)
-        @Phone  -- Phone - varchar(14)
+        @Phone  -- Phone - varchar(50)
         )
     ELSE
     BEGIN
@@ -28,7 +28,7 @@ AS
             )
             VALUES
             (   @Email, -- Email - varchar(255)
-                @Phone  -- Phone - varchar(14)
+                @Phone  -- Phone - varchar(50)
             )
             INSERT dbo.CompanyList
             (
