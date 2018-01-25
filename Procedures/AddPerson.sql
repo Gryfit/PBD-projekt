@@ -1,5 +1,5 @@
 CREATE PROC dbo.AddPerson
-    @CompanyName INT,
+    @CompanyName VARCHAR(50),
     @LastName VARCHAR(30),
     @FirstName VARCHAR(30),
     @IsStudent BIT

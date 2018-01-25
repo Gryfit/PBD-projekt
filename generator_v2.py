@@ -10,7 +10,7 @@ END = datetime(2018, 10, 8, 22, 40, 1)
 fake = Faker('en_GB')
 server = "mssql.iisg.agh.edu.pl"
 user = "kbak"
-password = "r1kAfWHp"
+password = "-----"
 
 conn = pymssql.connect(server, user, password, "kbak_a")
 cursor = conn.cursor()
