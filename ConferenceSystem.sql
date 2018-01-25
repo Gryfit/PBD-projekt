@@ -57,4 +57,4 @@ ADD CONSTRAINT FKTickets651408 FOREIGN KEY (PersonID) REFERENCES People (PersonI
 ALTER TABLE Conferences ADD CONSTRAINT CHK_date 
   CHECK (StartDate < EndDate);
 ALTER TABLE Conferences ADD CONSTRAINT CHK_length 
-  CHECK (DATEDIFF(day, StartDate, EndDate) <= 4;
+  CHECK (DATEDIFF(day, StartDate, EndDate)) <= 4;
