@@ -20,7 +20,10 @@ AS
 			    CompanyID
 			)
 			VALUES
-			(   (SELECT TOP 1 ClientID FROM dbo.Clients ORDER BY ClientID DESC), -- ClientID - int
+			(   (SELECT ClientID 
+			     FROM dbo.CompanyClients as cc 
+			     JOIN CompanyList as cl 
+			          ON cl.CompanyID = cc.CompanyID AND CompanyName = @CompanyName), -- ClientID - int
 			    (SELECT CompanyID FROM dbo.CompanyList WHERE CompanyName = @CompanyName)  -- CompanyID - int
 			    )
 		ELSE
