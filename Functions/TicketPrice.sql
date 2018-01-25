@@ -3,7 +3,7 @@ BEGIN
   RETURN
     (
       SELECT sum(c.BasePrice * (1 - dbo.ConferenceDiscount(t.ConferenceID, o.OrderDate) / 100) 
-      * (1 - dbo.IsStudent(t.PersonID) * c.StudentDiscount / 100) * cd.Cancelled)
+      * (1 - dbo.IsStudent(t.PersonID) * c.StudentDiscount / 100) * (1 - cd.Cancelled))
       FROM Tickets AS t
       JOIN Orders AS o
            ON o.OrderID = t.OrderID
