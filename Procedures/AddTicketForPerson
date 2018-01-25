@@ -11,6 +11,7 @@ AS
     IF NOT EXISTS (SELECT PersonID FROM People WHERE PersonID = @PersonID)
     BEGIN
         EXEC dbo.AddPerson @CompanyName, @LastName, @FirstName, @IsStudent
+        SET @PersonID = (SELECT Top 1 PersonID FROM People ORDER BY PersonID DESC)
     END
     
     BEGIN
