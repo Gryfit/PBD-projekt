@@ -24,6 +24,8 @@ BEGIN
     BEGIN
       RAISERROR ('The participant has reserved another Workshop at the time',-1,-1)
       ROLLBACK TRANSACTION
-      RETURN
     END
+    ELSE
+    BEGIN 
+      INSERT INTO WorkshopReservations (@WorkshopID, @TicketID)
 END 
