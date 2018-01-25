@@ -2,8 +2,8 @@ ALTER FUNCTION dbo.TicketPrice(@TicketID int) RETURNS decimal(10,2) AS
 BEGIN
   RETURN
     (
-      SELECT top 1 c.BasePrice * (1 - dbo.ConferenceDiscount(t.ConferenceID, o.OrderDate) / 100) 
-      * (1 - dbo.IsStudent(t.PersonID) * c.StudentDiscount / 100) * (1 - cd.Cancelled)
+      SELECT top 1 c.BasePrice * (100 - dbo.ConferenceDiscount(t.ConferenceID, o.OrderDate)) 
+      * (100 - dbo.IsStudent(t.PersonID) * c.StudentDiscount) * (1 - cd.Cancelled) / 10000
       FROM Tickets AS t
       JOIN Orders AS o
            ON o.OrderID = t.OrderID
